@@ -9,13 +9,17 @@ import categoryRouter from './routes/categoryRouter.js';
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+const corsOption={
+    origin:process.env.FRONTEND_URL
+}
+app.use(cors(corsOption))
 dotEnv.config()
 
 
-// app.get('/',(req,res)=>{
-//   res.send("api is running")
-// })
+app.get('/',(req,res)=>{
+  res.send("api is running")
+})
+
 //routes
 app.use("/",authRouter)
 

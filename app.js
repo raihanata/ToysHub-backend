@@ -7,13 +7,18 @@ import testRouter from './routes/testRouter.js';
 import categoryRouter from './routes/categoryRouter.js';
 
 
+dotEnv.config()
+
 const app = express()
 app.use(express.json())
+
 const corsOption={
     origin:process.env.FRONTEND_URL
+    
 }
+
 app.use(cors(corsOption))
-dotEnv.config()
+
 
 
 app.get('/',(req,res)=>{
@@ -27,17 +32,21 @@ app.use("/test",testRouter)
 app.use("/category",categoryRouter)
 
 //database collections
-mongoose.connect(process.env.MONGO_URI).then(()=>{
-console.log("database connected");
+mongoose.connect(process.env.MONGO_URI,{
+useNewUrlParser:true,
+useUnifiedTopology:true
+}).then(()=>console.log("Database connnecd"))
 
-})
-
-
-
-
+.catch((error=>console.log(error)))
 
 
 
-app.listen(8000,()=>{
-    console.log("server started at http://localhost:8000")
+
+
+
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT,
+    ()=>{
+    console.log(`server started at http://localhost:${PORT}`)
 })

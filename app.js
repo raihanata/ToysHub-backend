@@ -9,6 +9,7 @@ import productRouter from './routes/productRouter.js';
 import path from "path"
 import customerRouter from './routes/customerRouter.js';
 import salesRouter from './routes/salesRouter.js';
+import employeeRouter from './routes/employeeRouter.js';
 
 dotEnv.config()
 
@@ -37,6 +38,7 @@ app.use("/product",productRouter)
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.use("/customer",customerRouter)
 app.use("/sales",salesRouter)
+app.use("/employee",employeeRouter)
 //database collections
 mongoose.connect(process.env.MONGO_URI,{
 useNewUrlParser:true,

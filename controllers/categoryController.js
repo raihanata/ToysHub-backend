@@ -4,9 +4,11 @@ import Category from '../models/category.js'
 export const addCategory = async (req, res) => {
 
     try {
+      console.log("hai");
+      
 
-        const { name, categorydes } = req.body
-        const categorydata = new Category({ name, categorydes })
+        const { name, categoryDescription } = req.body
+        const categorydata = new Category({ name, categoryDescription })
         categorydata.save()
         if (!categorydata) {
             return res.status(400).json({

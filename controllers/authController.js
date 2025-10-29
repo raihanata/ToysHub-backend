@@ -26,7 +26,7 @@ try {
         })
     }
     const token = jwt.sign(
-        {UserId:userData._id},
+        {userId:userData._id},
         process.env.JWT_TOKEN,
         {expiresIn:"30d"}
     )

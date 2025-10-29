@@ -4,7 +4,7 @@ const categorySchema = new mongoose.Schema({
         type:String,
         required:true
     },
-     categorydes:{
+     categoryDescription:{
         type:String,
         required:true
     },   

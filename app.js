@@ -10,6 +10,7 @@ import path from "path"
 import customerRouter from './routes/customerRouter.js';
 import salesRouter from './routes/salesRouter.js';
 import employeeRouter from './routes/employeeRouter.js';
+import dashboardRouter from './routes/dashboardRouter.js';
 
 dotEnv.config()
 
@@ -23,7 +24,8 @@ const corsOption={
 
 app.use(cors(corsOption))
 
-
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/',(req,res)=>{
   res.send("api is running")
@@ -39,6 +41,7 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.use("/customer",customerRouter)
 app.use("/sales",salesRouter)
 app.use("/employee",employeeRouter)
+app.use("/dashboard",dashboardRouter)
 //database collections
 mongoose.connect(process.env.MONGO_URI,{
 useNewUrlParser:true,

@@ -72,3 +72,60 @@ export const getCustomers = async (req, res) => {
         message: "Error fetching customers" });
   }
 };
+//update
+
+export const updateCustomer = async (req, res) => {
+  try {
+    const { id } = req.query; 
+    const { customerName, customerPhone } = req.body;
+
+    const updatedCustomer = await Customer.findByIdAndUpdate(
+      id,
+      { customerName, customerPhone },
+      { new: true, }
+    );
+
+    if (!updatedCustomer)
+      return res.status(404).json({
+        status: false,
+        
+        message: "Customer not found",
+      });
+
+    res.status(200).json({
+      status: true,
+      message: "Customer updated successfully",
+      data: updatedCustomer,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: false,
+      message: "Error updating customer",
+    });
+  }
+};
+//  Delete Customer
+export const deleteCustomer = async (req, res) => {
+  try {
+    const { id } = req.query;
+    const deletedCustomer = await Customer.findByIdAndDelete(id);
+
+    if (!deletedCustomer)
+      return res.status(404).json({
+        status: false,
+        message: "Customer not found",
+      });
+
+    res.status(200).json({
+      status: true,
+      message: " Customer deleted successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      status: false,
+      message: "Error deleting customer",
+    });
+  }
+};
